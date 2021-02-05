@@ -1,4 +1,3 @@
-
 Feature:[SUC:03-09]-Taxpayer Account Enquiries
 
   @SUC:03-09 @UAT_M3_09-01 @UAT_M3_09-02
@@ -8,6 +7,7 @@ Feature:[SUC:03-09]-Taxpayer Account Enquiries
     Then Click on Taxpayer Accounting-->Taxpayer Account Enquiry
     And Select Entity Type "<entity_type>" and enter "<tin>"
     Then Select Tax Type Account "<tax_type_account>" and click select button
+    Then Verify account enquiry table column "Pay As You Earn Return"
     And Click on cancel button
     When Select taxpayer
     Then Click on view button
@@ -16,8 +16,8 @@ Feature:[SUC:03-09]-Taxpayer Account Enquiries
     When Select Suspense account  under "<tax_type_account_2>"
     Then Click on select button
     Examples:
-      | username  | password | entity_type | tin      | tax_type_account | tax_type_account_1 | tax_type_account_2 |
-      | tripsuser | Passw0rd | INDIVIDUAL  | P0021518 | Domestic VAT     | Payments           | Suspense           |
+      | username  | password | entity_type | tin         | tax_type_account | tax_type_account_1 | tax_type_account_2 |
+      | tripsuser | Passw0rd | INDIVIDUAL  | N0000019925 | Pay As You Earn  | Payments           | Suspense           |
 
 
 

@@ -6,8 +6,10 @@ Feature:[SUC:04-02] Print Revenue Accounting Reports
     Then Enter  username "<username>" and  password "<password>" to login
     Then Navigate to Reporting-->Reports
     Then Select report to print "Revenue Ledger Details"
-    And Select Report_Format "<report_format>"
-    And Enter  Start Date and click run report
+    Then Select report file type "<report_format>"
+    Then Enter transaction date
+    Then click run report
+    Then Verify file "Revenue Ledger Details.pdf" has been downloaded in downloads directory "C:\\Users\\Maxwell Maragia\\Downloads"
     Examples:
       | username  | password | report_format |
       | tripsuser | Passw0rd | PDF           |
@@ -16,10 +18,12 @@ Feature:[SUC:04-02] Print Revenue Accounting Reports
   Scenario Outline:UAT_M4_02-02-To verify the Revenue Ledger Details Reports in EXCEL format
     Given User is in browser to launch application url
     Then Enter  username "<username>" and  password "<password>" to login
-    Then navigate to Reporting-->Reports
+    Then Navigate to Reporting-->Reports
     Then Select report to print "Revenue Ledger Details"
-    And select Report_Format "<report_format>"
+    Then Select report file type "<report_format>"
+    Then Enter transaction date
     Then click run report
+    Then Verify file "Revenue Ledger Details.xls" has been downloaded in downloads directory "C:\\Users\\Maxwell Maragia\\Downloads"
     Examples:
       | username  | password | report_format |
       | tripsuser | Passw0rd | EXCEL         |
@@ -28,11 +32,12 @@ Feature:[SUC:04-02] Print Revenue Accounting Reports
   Scenario Outline:UAT_M4_02-07-To verify the process of printing Chart of Accounts Report
     Given User is in browser to launch application url
     Then Enter  username "<username>" and  password "<password>" to login
-    Then navigate to reporting-->Reports
+    Then Navigate to Reporting-->Reports
     Then Select report to print "Chart Of Accounts Report"
-    And select Report_format "<report_format>"
+    Then Select report file type "<report_format>"
     And Select "<tax_type>"
     Then Click run report
+    Then Verify file "Chart Of Accounts Report.xls" has been downloaded in downloads directory "C:\\Users\\Maxwell Maragia\\Downloads"
     Examples:
       | username  | password | report_format | tax_type     |
       | tripsuser | Passw0rd | EXCEL         | Domestic VAT |
@@ -41,7 +46,7 @@ Feature:[SUC:04-02] Print Revenue Accounting Reports
   Scenario Outline:UAT_M4_02-08-To verify the process of Abandon Report
     Given User is in browser to launch application url
     Then Enter  username "<username>" and  password "<password>" to login
-    Then navigate To Reporting--->Reports
+    Then Navigate to Reporting-->Reports
     Then Select report to print "Chart Of Accounts Report"
     Then click on Cancel
     Examples:

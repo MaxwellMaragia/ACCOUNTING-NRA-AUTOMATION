@@ -4,7 +4,7 @@ Feature: [SUC:03-16]-Portal-Detailed Account View
   Scenario: UAT_M3_16-01-To verify all fields on Detailed Account View screen-Individual Portal
     Given Launch portal in browser
     Then Login to portal
-      | maxipain | Codei@maseno2020 |
+      | portalsanity | Codei@maseno2020 |
     Then Verify Home Screen Buttons
       | HOME       |
       | MY ACCOUNT |
@@ -30,7 +30,7 @@ Feature: [SUC:03-16]-Portal-Detailed Account View
   Scenario Outline: UAT_M3_16-02-To verify the fields displayed in Taxpayer's suspense account-Individual Portal
     Given Launch portal in browser
     Then Login to portal
-      | maxipain | Codei@maseno2020 |
+      | portalsanity | Codei@maseno2020 |
     Then Click MY TAX button
     Then Select Suspense account
     Then Verify the input fields
@@ -47,7 +47,7 @@ Feature: [SUC:03-16]-Portal-Detailed Account View
   Scenario: UAT_M3_16-3-Taxpayer Account Enquiry of a Taxpayer with suspended Tax types-Individual Portal
     Given Launch portal in browser
     Then Login to portal
-      | maxipain | Codei@maseno2020 |
+      | portalsanity | Codei@maseno2020 |
     Then Click MY TAX button
     Then Click on a suspended tax type
     Then Verify Status "Suspended" in field "//span[contains(text(),'Suspended')]"
@@ -57,7 +57,7 @@ Feature: [SUC:03-16]-Portal-Detailed Account View
   Scenario: UAT_M3_16-4-Taxpayer Account Enquiry of a Taxpayer with De-Registered Tax types-Individual Portal
     Given Launch portal in browser
     Then Login to portal
-      | maxipain | Codei@maseno2020 |
+      | portalsanity | Codei@maseno2020 |
     Then Click MY TAX button
     Then Click on a de registered tax type
     Then Verify Status "De-registered" in field "//span[contains(text(),'De-registered')]"
@@ -67,9 +67,9 @@ Feature: [SUC:03-16]-Portal-Detailed Account View
   Scenario Outline: UAT_M3_16-5-To view payment details Individual portal
     Given Launch portal in browser
     Then Login to portal
-      | maxipain | Codei@maseno2020 |
+      | portalsanity | Codei@maseno2020 |
     Then Click MY TAX button
-    Then Select Suspense account
+    Then Select Suspense account with trans
     Then Verify transaction table columns "<TaxAccountType>" and "<AccountNumber>" and "<CurrentBalance>" and "<CurrentStatus>"
     Then Verify current balance is not zero
     Examples:
@@ -80,9 +80,9 @@ Feature: [SUC:03-16]-Portal-Detailed Account View
   Scenario Outline: UAT_M3_16-6-To view payment details Individual portal
     Given Launch portal in browser
     Then Login to portal
-      | maxipain | Codei@maseno2020 |
+      | portalsanity | Codei@maseno2020 |
     Then Click MY TAX button
-    Then Select Suspense account
+    Then Select Suspense account with trans
     Then Enter end date value that is more than 365 days from current start date "<Date>"
     Then Search for payment details
     Then Verify error message "<ErrorMessage>"
@@ -96,7 +96,7 @@ Feature: [SUC:03-16]-Portal-Detailed Account View
   Scenario: UAT_M3_16-07-To verify all the fields on Detailed Account View screen-Organisation Portal
     Given Launch portal in browser
     Then Login to portal
-      | codeisystems | Codei@maseno2020 |
+      | portalsanity | Codei@maseno2020 |
     Then Verify Home Screen Buttons
       | HOME       |
       | MY ACCOUNT |

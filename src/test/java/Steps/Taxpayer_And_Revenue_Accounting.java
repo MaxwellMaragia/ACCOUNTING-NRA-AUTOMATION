@@ -18,7 +18,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.BaseClass;
 import utils.BaseClass;
 
+import java.io.File;
 import java.io.FileInputStream;
+import java.security.Key;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -302,7 +305,8 @@ public class Taxpayer_And_Revenue_Accounting extends BaseClass {
     public void fill_in_fields_and_click_save(String Code, String Description, String EffectiveDate, String ExpiryDate, String Status) throws Throwable {
 
         Thread.sleep(2000);
-        driver.findElement(By.id(Pro.getProperty("AccountCode_Input_ID"))).sendKeys(Code);
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        driver.findElement(By.id(Pro.getProperty("AccountCode_Input_ID"))).sendKeys(String.valueOf(timestamp.getTime()));
         driver.findElement(By.id(Pro.getProperty("CategoryDescription_Input_ID"))).sendKeys(Description);
         driver.findElement(By.id(Pro.getProperty("EffectiveDate_Input_ID"))).sendKeys(Keys.ENTER);
         driver.findElement(By.id(Pro.getProperty("ExpiryDate_Input_ID"))).click();
@@ -405,8 +409,9 @@ public class Taxpayer_And_Revenue_Accounting extends BaseClass {
     public void fill_in_fields_to_save_sub_category(String Code, String Description, String EffectiveDate, String ExpiryDate, String Status) throws Throwable {
 
         Thread.sleep(3000);
-        driver.findElement(By.id(Pro.getProperty("SubCategory_Code_Input_ID"))).sendKeys(Code);
-        driver.findElement(By.id(Pro.getProperty("SubCategory_Code_Description_ID"))).sendKeys(Description);
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        driver.findElement(By.id(Pro.getProperty("SubCategory_Code_Input_ID"))).sendKeys(String.valueOf(timestamp.getTime()));
+        driver.findElement(By.id(Pro.getProperty("SubCategory_Code_Description_ID"))).sendKeys("Sub category "+String.valueOf(timestamp.getTime()));
 
         //lets use javascript to send date fields since sendKeys method has inconsistent behavior in date fields
         driver.findElement(By.id(Pro.getProperty("SubCategory_EffectiveDate_Input_ID"))).sendKeys(Keys.ENTER);
@@ -461,8 +466,9 @@ public class Taxpayer_And_Revenue_Accounting extends BaseClass {
     public void edit_fields_in_add_category_then_click_save(String Description, String EffectiveDate, String ExpiryDate, String Status) throws Throwable {
 
         Thread.sleep(3000);
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         driver.findElement(By.id(Pro.getProperty("CategoryDescription_Input_ID"))).clear();
-        driver.findElement(By.id(Pro.getProperty("CategoryDescription_Input_ID"))).sendKeys(Description);
+        driver.findElement(By.id(Pro.getProperty("CategoryDescription_Input_ID"))).sendKeys("Account code"+String.valueOf(timestamp.getTime()));
         //lets use javascript to send date fields since sendKeys method has inconsistent behavior in date fields
 
 //        driver.findElement(By.id(Pro.getProperty("EffectiveDate_Input_ID"))).clear();
@@ -491,11 +497,11 @@ public class Taxpayer_And_Revenue_Accounting extends BaseClass {
     @Then("^Edit fields \"([^\"]*)\" and \"([^\"]*)\" and \"([^\"]*)\" then click save to edit subcategory$")
     public void edit_fields_in_sub_category_then_click_save(String Code, String Description, String EffectiveDate) throws Throwable {
         Thread.sleep(3000);
-
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         driver.findElement(By.id(Pro.getProperty("SubCategory_Code_Input_ID"))).clear();
-        driver.findElement(By.id(Pro.getProperty("SubCategory_Code_Input_ID"))).sendKeys(Code);
+        driver.findElement(By.id(Pro.getProperty("SubCategory_Code_Input_ID"))).sendKeys(String.valueOf(timestamp.getTime()));
         driver.findElement(By.id(Pro.getProperty("SubCategory_Code_Description_ID"))).clear();
-        driver.findElement(By.id(Pro.getProperty("SubCategory_Code_Description_ID"))).sendKeys(Description);
+        driver.findElement(By.id(Pro.getProperty("SubCategory_Code_Description_ID"))).sendKeys("Description"+String.valueOf(timestamp.getTime()));
         //lets use javascript to send date fields since sendKeys method has inconsistent behavior in date fields
         driver.findElement(By.id(Pro.getProperty("SubCategory_EffectiveDate_Input_ID"))).sendKeys(Keys.ENTER);
 
@@ -561,7 +567,7 @@ public class Taxpayer_And_Revenue_Accounting extends BaseClass {
         Thread.sleep(1000);
         driver.findElement(By.xpath(Pro.getProperty("Fifth_Treeview_Dropdown_XPATH"))).click();
         Thread.sleep(1000);
-        driver.findElement(By.xpath(Pro.getProperty("Sixth_Treeview_Dropdown_XPATH"))).click();
+        //driver.findElement(By.xpath(Pro.getProperty("Sixth_Treeview_Dropdown_XPATH"))).click();
 
     }
 
@@ -570,7 +576,7 @@ public class Taxpayer_And_Revenue_Accounting extends BaseClass {
 
         Thread.sleep(1000);
         //Click on seventh table row
-        driver.findElement(By.id(Pro.getProperty("Sixth_Treeview_Table_Row_ID"))).click();
+        driver.findElement(By.id(Pro.getProperty("Fifth_Treeview_Table_Row_ID"))).click();
 
     }
 
@@ -715,8 +721,9 @@ public class Taxpayer_And_Revenue_Accounting extends BaseClass {
     @Then("Fill in fields {string} and {string} and {string} and {string} and {string} and {string} and {string} and {string} and {string} and {string} to save ledger account")
     public void fillInFieldsToSaveLedgerAccount(String Code, String Description, String EffectiveDate, String ExpiryDate, String Status, String TaxType, String DocumentType, String TaxPayerType, String ChargeType, String BusinessSectorDivision) throws Throwable {
         Thread.sleep(3000);
-        driver.findElement(By.id(Pro.getProperty("SubCategory_Code_Input_ID"))).sendKeys(Code);
-        driver.findElement(By.id(Pro.getProperty("CategoryDescription_Input_ID"))).sendKeys(Description);
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        driver.findElement(By.id(Pro.getProperty("SubCategory_Code_Input_ID"))).sendKeys(String.valueOf(timestamp.getTime()));
+        driver.findElement(By.id(Pro.getProperty("CategoryDescription_Input_ID"))).sendKeys("Ledger"+String.valueOf(timestamp.getTime()));
         //lets use javascript to send date fields since sendKeys method has inconsistent behavior in date fields
         driver.findElement(By.id(Pro.getProperty("EffectiveDate_Input_ID"))).sendKeys(Keys.ENTER);
         driver.findElement(By.id(Pro.getProperty("ExpiryDate_Input_ID"))).click();
@@ -772,9 +779,9 @@ public class Taxpayer_And_Revenue_Accounting extends BaseClass {
     public void fillInFieldsInLedgerAccountAccountDetails(String Code, String Description, String EffectiveDate, String ExpiryDate, String Status) throws Throwable {
 
         Thread.sleep(3000);
-
-        driver.findElement(By.id(Pro.getProperty("SubCategory_Code_Input_ID"))).sendKeys(Code);
-        driver.findElement(By.id(Pro.getProperty("CategoryDescription_Input_ID"))).sendKeys(Description);
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        driver.findElement(By.id(Pro.getProperty("SubCategory_Code_Input_ID"))).sendKeys(String.valueOf(timestamp.getTime()));
+        driver.findElement(By.id(Pro.getProperty("CategoryDescription_Input_ID"))).sendKeys("Ledger sample "+String.valueOf(timestamp.getTime()));
         //lets use javascript to send date fields since sendKeys method has inconsistent behavior in date fields
         driver.findElement(By.id(Pro.getProperty("EffectiveDate_Input_ID"))).sendKeys(Keys.ENTER);
         driver.findElement(By.id(Pro.getProperty("ExpiryDate_Input_ID"))).click();
@@ -794,9 +801,9 @@ public class Taxpayer_And_Revenue_Accounting extends BaseClass {
     @And("^Click on Taxpayer accounting > Manage Credit Allocation$")
     public void click_on_taxpayer_accounting_manage_credit_allocation() throws Throwable {
 
-        BaseClass.waitForPageToLoad();
-        driver.findElement(By.xpath("//*[@id=\"MenuForm:j_idt29\"]/ul/li[2]")).click();
-        driver.findElement(By.xpath("//*[@id=\"MenuForm:j_idt29\"]/ul/li[2]/ul/li[7]")).click();
+        WebDriverWait wait = new WebDriverWait(driver,30);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"MenuForm:j_idt27\"]/ul/li[2]/a"))).click();
+        driver.findElement(By.xpath("//*[@id=\"MenuForm:j_idt27\"]/ul/li[2]/ul/li[7]/a")).click();
 
     }
 
@@ -813,9 +820,7 @@ public class Taxpayer_And_Revenue_Accounting extends BaseClass {
             } else {
                 Assert.fail();
             }
-
         }
-
     }
 
     @Then("^Verify table columns \"([^\"]*)\" and \"([^\"]*)\" and \"([^\"]*)\" and \"([^\"]*)\" and \"([^\"]*)\" and \"([^\"]*)\" and \"([^\"]*)\"$")
@@ -834,7 +839,6 @@ public class Taxpayer_And_Revenue_Accounting extends BaseClass {
                 System.out.println("Table column '" + table_columns[i] + "' not found");
                 Assert.fail();
             }
-
         }
     }
 
@@ -871,11 +875,8 @@ public class Taxpayer_And_Revenue_Accounting extends BaseClass {
 
     @Then("^Click save$")
     public void click_save() throws Throwable {
-
-
         BaseClass.waitForPageToLoad();
         driver.findElement(By.id(Pro.getProperty("Credit_Allocation_Save_Button_ID"))).click();
-
 
     }
 
@@ -893,7 +894,6 @@ public class Taxpayer_And_Revenue_Accounting extends BaseClass {
             Assert.fail("Error message not shown");
 
         }
-
     }
 
     @Then("^Shift focus to modal$")
@@ -944,11 +944,11 @@ public class Taxpayer_And_Revenue_Accounting extends BaseClass {
         Thread.sleep(2000);
         driver.findElement(By.id(Pro.getProperty("Find_Entity_Tin_Search_Button_ID"))).click();
         //driver.findElement(By.id(Pro.getProperty("Find_Entity_Tin_Search_Button_ID"))).click();
-        Thread.sleep(15000);
-        driver.findElement(By.xpath(Pro.getProperty("Find_Business_Transaction_First_Table_Row_XPATH"))).click();
-        Thread.sleep(2000);
-
-        driver.findElement(By.id(Pro.getProperty("Continue_Button_ID"))).click();
+//        Thread.sleep(15000);
+//        driver.findElement(By.xpath(Pro.getProperty("Find_Business_Transaction_First_Table_Row_XPATH"))).click();
+//        Thread.sleep(2000);
+//
+//        driver.findElement(By.id(Pro.getProperty("Continue_Button_ID"))).click();
 
         Thread.sleep(8000);
         UnallocatedCreditAmount = Double.parseDouble(driver.findElement(By.id("CreditAllocation:crBalance_input")).getAttribute("value").replaceAll(",", ""));
@@ -1223,8 +1223,8 @@ public class Taxpayer_And_Revenue_Accounting extends BaseClass {
 
         BaseClass.waitForPageToLoad();
         driver.findElement(By.xpath(Pro.getProperty("RevenueAccounting_Dropdown_XPATH"))).click();
-        driver.findElement(By.xpath("//*[@id=\"MenuForm:j_idt29\"]/ul/li[3]/ul/li[2]")).click();
-        driver.findElement(By.xpath("//*[@id=\"sub1\"]/ul/li[3]")).click();
+        driver.findElement(By.xpath("//*[@id=\"MenuForm:j_idt27\"]/ul/li[3]/ul/li[2]/a")).click();
+        driver.findElement(By.xpath("//*[@id=\"sub1\"]/ul/li[3]/a")).click();
 
     }
 
@@ -1249,8 +1249,8 @@ public class Taxpayer_And_Revenue_Accounting extends BaseClass {
     public void click_on_revenue_accounting_system_revenue_control_accounts_total_revenue_account() throws Throwable {
         BaseClass.waitForPageToLoad();
         driver.findElement(By.xpath(Pro.getProperty("RevenueAccounting_Dropdown_XPATH"))).click();
-        driver.findElement(By.xpath("//*[@id=\"MenuForm:j_idt29\"]/ul/li[3]/ul/li[2]")).click();
-        driver.findElement(By.xpath("//*[@id=\"sub1\"]/ul/li[4]")).click();
+        driver.findElement(By.xpath("//*[@id=\"MenuForm:j_idt27\"]/ul/li[3]/ul/li[2]/a")).click();
+        driver.findElement(By.xpath("//*[@id=\"sub1\"]/ul/li[4]/a")).click();
     }
 
     @Then("^Verify existence of table columns \"([^\"]*)\" and \"([^\"]*)\" and \"([^\"]*)\" and \"([^\"]*)\" and \"([^\"]*)\" and \"([^\"]*)\" and \"([^\"]*)\" and \"([^\"]*)\" and \"([^\"]*)\" and \"([^\"]*)\" in table$")
@@ -1411,6 +1411,13 @@ public class Taxpayer_And_Revenue_Accounting extends BaseClass {
     }
 
     //Click on suspence account table row
+    @Then("^Select Suspense account with trans$")
+    public void select_suspense_account_with_trans() throws Throwable {
+        WebDriverWait wait = new WebDriverWait(driver,120);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"id_pTableTaxAccountSummary\"]/div/div[1]/table/tbody/tr[3]/td[1]"))).click();
+    }
+
+    //Click on suspence account table row
     @Then("^Select Suspense account$")
     public void select_suspense_account() throws Throwable {
         WebDriverWait wait = new WebDriverWait(driver,120);
@@ -1503,11 +1510,16 @@ public class Taxpayer_And_Revenue_Accounting extends BaseClass {
     @Then("^Enter end date value that is more than 365 days from current start date \"([^\"]*)\"$")
     public void enter_end_date_value_that_is_more_than_365_days_from_current_start_date(String date) throws Throwable {
         BaseClass.waitForPageToLoad();
-        Thread.sleep(3000);
+        driver.findElement(By.id("id_endDate")).clear();
+        Thread.sleep(2000);
+        driver.findElement(By.id("id_endDate")).sendKeys(date);
+
+//        Thread.sleep(2000);
+       driver.findElement(By.id("id_endDate")).sendKeys(Keys.TAB);
         //jse.executeScript("document.getElementById('"+Pro.getProperty("End_Date_ID")+"').setAttribute('value', '"+date+"')");
-        driver.findElement(By.xpath(Pro.getProperty("Date_Picker_XPATH"))).click();
-        Thread.sleep(3000);
-        driver.findElement(By.xpath(Pro.getProperty("Date_XPATH"))).click();
+//        driver.findElement(By.xpath(Pro.getProperty("Date_Picker_XPATH"))).click();
+//        Thread.sleep(3000);
+//        driver.findElement(By.xpath(Pro.getProperty("Date_XPATH"))).click();
 
 
     }
@@ -1522,8 +1534,8 @@ public class Taxpayer_And_Revenue_Accounting extends BaseClass {
     @Then("^Verify error message \"([^\"]*)\"$")
     public void verify_error_message_something(String ErrorMessage) throws Throwable {
 
-        Thread.sleep(1000);
-        WebElement successMessage = driver.findElement(By.xpath("//span[contains(text(),'" + ErrorMessage + "')]"));
+        WebDriverWait wait = new WebDriverWait(driver,30);
+        WebElement successMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'" + ErrorMessage + "')]")));
 
         if (successMessage.isDisplayed()) {
             System.out.println("Error message ('" + ErrorMessage + "') has been displayed");
@@ -1652,7 +1664,7 @@ public class Taxpayer_And_Revenue_Accounting extends BaseClass {
 
     @Given("^User is in browser to launch application url$")
     public void user_is_in_browser_to_launch_application_url() throws Throwable {
-        driver.get("http://18.202.88.7:8001/trips-ui/faces/login/tripsLogin.xhtml");
+        driver.get(Pro.getProperty("MRA_BackOffice_URL"));
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 
     }
@@ -1696,23 +1708,20 @@ public class Taxpayer_And_Revenue_Accounting extends BaseClass {
 
         Thread.sleep(2000);
 
-        driver.findElement(By.xpath("//*[@id=\"SearchForm:j_idt42\"]/span")).click();
+        driver.findElement(By.id("SearchForm:j_idt40")).click();
 
     }
 
 
     @Then("^Select Tax Type Account \"([^\"]*)\" and click select button$")
     public void select_tax_type_account_something_and_click_select_button(String tax_type_account_1) throws Throwable {
-        JavascriptExecutor executor = (JavascriptExecutor) driver;
-
-        WebElement taxTypeAccDropdown=driver.findElement(By.xpath("//*[@id=\"AccountEnquiry:TaxTypeAccount\"]/div[3]"));
-        executor.executeScript("arguments[0].scrollIntoView(true);", taxTypeAccDropdown);
-        taxTypeAccDropdown.click();
-        Thread.sleep(2000);
+        WebDriverWait wait = new WebDriverWait(driver,30);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"AccountEnquiry:TaxTypeAccount\"]/div[3]"))).click();
+        Thread.sleep(1500);
         driver.findElement(By.xpath("//li[contains(text(),'"+tax_type_account_1+"')]")).click();
 
-        driver.findElement(By.id("AccountEnquiry:j_idt66")).click();
-        Thread.sleep(4000);
+        driver.findElement(By.id("AccountEnquiry:j_idt64")).click();
+        Thread.sleep(2000);
     }
 
     @And("^Click on cancel button$")
@@ -1764,6 +1773,16 @@ public class Taxpayer_And_Revenue_Accounting extends BaseClass {
         taxTypeAccDropdown.click();
         Thread.sleep(2000);
         driver.findElement(By.xpath("//li[contains(text(),'"+tax_type_account_2+"')]")).click();
+
+
+        Thread.sleep(4000);
+    }
+
+    @Then("^Verify account enquiry table column \"([^\"]*)\"$")
+    public void verify_account_enquiry_table_column(String tax_type_account_2) throws Throwable {
+        WebDriverWait wait = new WebDriverWait(driver,30);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//td[contains(text(),'"+tax_type_account_2+"')]")));
+
 
 
         Thread.sleep(4000);
@@ -2650,9 +2669,35 @@ public class Taxpayer_And_Revenue_Accounting extends BaseClass {
 // 01
     @Then("^Navigate to Reporting-->Reports$")
     public void navigate_to_reportingreports() throws Throwable {
-        driver.findElement(By.xpath("//*[@id=\"MenuForm:j_idt29\"]/ul/li[4]/a")).click();
-        driver.findElement(By.xpath("//*[@id=\"MenuForm:j_idt29\"]/ul/li[4]/ul/li[1]/a")).click();
+        WebDriverWait wait = new WebDriverWait(driver,30);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"MenuForm:j_idt27\"]/ul/li[4]/a"))).click();
+
+        driver.findElement(By.xpath("//*[@id=\"MenuForm:j_idt27\"]/ul/li[4]/ul/li[1]/a")).click();
         Thread.sleep(1000);
+    }
+
+    public boolean isFileDownloaded(String downloadPath, String fileName) {
+        File dir = new File(downloadPath);
+        File[] dirContents = dir.listFiles();
+        for (int i = 0; i < dirContents.length; i++) {
+            if (dirContents[i].getName().equals(fileName)) {
+                // File has been found, it can now be deleted:
+                dirContents[i].delete();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Then("^Verify file \"([^\"]*)\" has been downloaded in downloads directory \"([^\"]*)\"$")
+    public void verify_file_has_been_downloaded_in_downloads_directory(String fileName, String downloadPath) throws Throwable {
+        Thread.sleep(5000);
+        if (isFileDownloaded(downloadPath, fileName)) {
+            System.out.println(fileName + ": has been downloaded");
+            Assert.assertTrue(true);
+        } else {
+            Assert.assertFalse(fileName + ": has not been downloaded", false);
+        }
     }
 
     @Then("^Click  Revenue Accounting-->Revenue Ledger Details Report$")
@@ -2679,6 +2724,16 @@ public class Taxpayer_And_Revenue_Accounting extends BaseClass {
             }
         }
         Thread.sleep(4000);
+
+    }
+
+    @Then("^Select report file type \"([^\"]*)\"$")
+    public void select_report_file_type(String reportFormat) throws Throwable {
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"frmReportDetails:ReportFormat\"]/div[3]"))).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//li[contains(text(),'" + reportFormat + "')]")).click();
+        Thread.sleep(1000);
 
     }
 
@@ -2774,21 +2829,11 @@ public class Taxpayer_And_Revenue_Accounting extends BaseClass {
 
     @And("^Select \"([^\"]*)\"$")
     public void Select_something(String tax_type) throws Throwable {
-        driver.findElement(By.cssSelector("#frmReportDetails\\:TAX_TYPE")).click();
-        Thread.sleep(2000);
-        WebElement dropdown = driver.findElement(By.xpath("//*[@id=\"frmReportDetails:TAX_TYPE_items\"]"));
-        List<WebElement> entity_list = dropdown.findElements(By.tagName("li"));
-        for (WebElement li : entity_list) {
-            System.out.print(000);
-            if (li.getText().equals(tax_type)) {
-                li.click();
-                System.out.print(0000);
-                //to stop the loop
-                break;
-            }
-
-        }
-        Thread.sleep(2000);
+        WebDriverWait wait = new WebDriverWait(driver, 20);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"frmReportDetails:TAX_TYPE\"]/div[3]"))).click();
+        Thread.sleep(1000);
+        Actions action = new Actions(driver);
+        action.sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ENTER).perform();
     }
 
     //4
@@ -2938,10 +2983,10 @@ public class Taxpayer_And_Revenue_Accounting extends BaseClass {
 //x
     @Then("^Navigate to Revenue Accounting System->Maintain Revenue Targets->Maintain Treasury Target$")
     public void navigate_to_revenue_accounting_systemmaintain_revenue_targetsmaintain_treasury_target() throws Throwable {
-        driver.findElement(By.xpath("//*[@id=\"MenuForm:j_idt29\"]/ul/li[3]")).click();
+        driver.findElement(By.xpath("//*[@id=\"MenuForm:j_idt27\"]/ul/li[3]/a")).click();
         Thread.sleep(5000);
-        driver.findElement(By.xpath("/html/body/div[2]/form/div/ul/li[3]/ul/li[1]")).click();
-        driver.findElement(By.xpath("/html/body/div[2]/form/ul/li/ul/li[1]")).click();
+        driver.findElement(By.xpath("//*[@id=\"MenuForm:j_idt27\"]/ul/li[3]/ul/li[1]/a")).click();
+        driver.findElement(By.xpath("//*[@id=\"sub1\"]/ul/li[1]/a")).click();
         Thread.sleep(5000);
     }
 
@@ -2951,12 +2996,28 @@ public class Taxpayer_And_Revenue_Accounting extends BaseClass {
         Thread.sleep(5000);
     }
 
+    @Then("Click update in Mantain treasury target screen")
+    public void clickUpdateInMantainTreasuryTargetScreen() throws Throwable{
+        Thread.sleep(2000);
+        driver.findElement(By.id("MaintainTreasuryTarget:EditTreasuryTarget")).click();
+    }
+
+    @Then("Modify percentage of Management Target to {string}")
+    public void modifyPercentageOfManagementTargetTo(String target) {
+        WebDriverWait wait = new WebDriverWait(driver,30);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("treasuryTargetAllotment:TreasuryPercentage"))).sendKeys(target);
+        driver.findElement(By.id("treasuryTargetAllotment:idSave")).click();
+        driver.switchTo().defaultContent();
+    }
+
 ////#treasuryTargetAllotment\:TreasuryYear//*[@id="treasuryTargetAllotment:TreasuryYear_items"]//*[@id="treasuryTargetAllotment:TreasuryPercentage"]//*[@id="treasuryTargetAllotment:idSave"]
 
     //y
     @Then("^Navigate To Revenue Accounting System->Maintain Revenue Targets->Maintain Treasury Target$")
     public void Navigate_to_revenue_accounting_systemmaintain_revenue_targetsmaintain_treasury_target() throws Throwable {
-        driver.findElement(By.xpath("//*[@id=\"MenuForm:j_idt29\"]/ul/li[3]")).click();
+        WebDriverWait wait = new WebDriverWait(driver,30);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"MenuForm:j_idt29\"]/ul/li[3]"))).click();
+
         driver.findElement(By.xpath("/html/body/div[2]/form/div/ul/li[3]/ul/li[1]")).click();
         driver.findElement(By.xpath("/html/body/div[2]/form/ul/li/ul/li[1]")).click();
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
@@ -2976,39 +3037,38 @@ public class Taxpayer_And_Revenue_Accounting extends BaseClass {
     }
 
 
-    @And("^Enter Required Data and click ok button$")
-    public void enter_required_data_and_click_ok_button() throws Throwable {
+    @And("^Select \"([^\"]*)\" and percentage then click ok$")
+    public void enter_required_data_and_click_ok_button(String year) throws Throwable {
 //open status dropdown
         driver.findElement(By.xpath("//*[@id=\"treasuryTargetAllotment:TreasuryYear\"]/div[3]")).click();
-        Thread.sleep(3000);
+        Thread.sleep(1000);
 //select status
-        String StatusXpath = "//li[@data-label='2091']";
+        String StatusXpath = "//li[@data-label='"+year+"']";
         driver.findElement(By.xpath(StatusXpath)).click();
-        Thread.sleep(3000);
-        driver.findElement(By.xpath("//*[@id=\"treasuryTargetAllotment:TreasuryPercentage\"]")).sendKeys("11");
+        Thread.sleep(2000);
+        driver.findElement(By.xpath("//*[@id=\"treasuryTargetAllotment:TreasuryPercentage\"]")).sendKeys("30");
         Thread.sleep(2000);
         driver.findElement(By.xpath("//*[@id=\"treasuryTargetAllotment:idSave\"]")).click();
         driver.switchTo().defaultContent();
-        Thread.sleep(9000);
+        Thread.sleep(2000);
     }
 
     //z
     @Then("^navigate to Revenue Accounting System->Maintain Revenue Targets->Maintain Management Target$")
     public void navigate_to_revenue_accounting__systemmaintain_revenue_targetsmaintain_treasury_target() throws Throwable {
-        driver.findElement(By.xpath("//*[@id=\"MenuForm:j_idt29\"]/ul/li[3]")).click();
-        driver.findElement(By.xpath("/html/body/div[2]/form/div/ul/li[3]/ul/li[1]")).click();
-        driver.findElement(By.xpath("/html/body/div[2]/form/ul/li/ul/li[2]/a")).click();
-        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        Thread.sleep(6000);
+        WebDriverWait wait = new WebDriverWait(driver,30);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"MenuForm:j_idt27\"]/ul/li[3]/a"))).click();
+        driver.findElement(By.xpath("//*[@id=\"MenuForm:j_idt27\"]/ul/li[3]/ul/li[1]/a")).click();
+        driver.findElement(By.xpath("//*[@id=\"sub1\"]/ul/li[2]/a")).click();
+
     }
 
     @Then("^Click  on add button$")
     public void click__on_add_button() throws Throwable {
-        driver.findElement(By.xpath("//*[@id=\"MaintainRevenueTarget:j_idt57\"]")).click();
-        Thread.sleep(5000);
+        WebDriverWait wait = new WebDriverWait(driver,30);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"MaintainRevenueTarget:j_idt57\"]"))).click();
 
-        Thread.sleep(3000);
-        WebElement AddCategoryIframe = driver.findElement(By.tagName("iframe"));
+        WebElement AddCategoryIframe = wait.until(ExpectedConditions.visibilityOfElementLocated(By.tagName("iframe")));
         driver.switchTo().frame(AddCategoryIframe);
         Thread.sleep(2000);
 
@@ -3070,9 +3130,19 @@ public class Taxpayer_And_Revenue_Accounting extends BaseClass {
         driver.findElement(By.xpath("//*[@id=\"MaintainRevenueTarget:UpdateButton\"]")).click();
     }
 
-    @Then("^Update Tax Office Target details$")
-    public void update_tax_office_target_details() throws Throwable {
+    @Then("^Change the month to \"([^\"]*)\"$")
+    public void update_tax_office_target_details(String month) throws Throwable {
+        WebDriverWait wait = new WebDriverWait(driver,10);
+        WebElement AddCategoryIframe = wait.until(ExpectedConditions.visibilityOfElementLocated(By.tagName("iframe")));
+        driver.switchTo().frame(AddCategoryIframe);
 
+        //open status dropdown
+        driver.findElement(By.xpath("//*[@id=\"SetRevenueTarget:TargetMonth\"]/div[3]")).click();
+        Thread.sleep(1000);
+        //select status
+        String StatusXpath = "//li[@data-label='"+month+"']";
+        driver.findElement(By.xpath(StatusXpath)).click();
+        Thread.sleep(1000);
     }
 
     @And("^Click ok$")
@@ -3093,54 +3163,60 @@ public class Taxpayer_And_Revenue_Accounting extends BaseClass {
 
     @Then("^Click add button : set management target$")
     public void click_add_button_in_set_revenue_target() throws Throwable {
-        driver.findElement(By.xpath("//*[@id=\"MaintainRevenueTarget:j_idt57\"]")).click();
-        Thread.sleep(5000);
+        WebDriverWait wait = new WebDriverWait(driver,10);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("MaintainRevenueTarget:j_idt55"))).click();
     }
 
-    @Then("^enter data$")
-    public void enter_data() throws Throwable {
-        Thread.sleep(3000);
-        WebElement AddCategoryIframe = driver.findElement(By.tagName("iframe"));
+    @Then("Switch to frame : backoffice")
+    public void switchToFrameBackoffice() {
+        WebDriverWait wait = new WebDriverWait(driver,10);
+        WebElement Iframe = wait.until(ExpectedConditions.visibilityOfElementLocated(By.tagName("iframe")));
+        driver.switchTo().frame(Iframe);
+    }
+
+    @Then("^Fill in year as \"([^\"]*)\" and other necessary details$")
+    public void enter_data(String year) throws Throwable {
+        WebDriverWait wait = new WebDriverWait(driver,10);
+        WebElement AddCategoryIframe = wait.until(ExpectedConditions.visibilityOfElementLocated(By.tagName("iframe")));
         driver.switchTo().frame(AddCategoryIframe);
-        Thread.sleep(2000);
 
         //open status dropdown
         driver.findElement(By.xpath("//*[@id=\"SetRevenueTarget:TargetYear\"]/div[3]")).click();
-        Thread.sleep(5000);
+        Thread.sleep(1000);
         //select status
-        String StatusXpath = "//li[@data-label='2018']";
+        String StatusXpath = "//li[@data-label='"+year+"']";
         driver.findElement(By.xpath(StatusXpath)).click();
-        Thread.sleep(5000);
+        Thread.sleep(1000);
 
 
         //open status dropdown//*[@id="MaintainRevenueTarget:TargetMonth"]/div[3]
         driver.findElement(By.xpath("//*[@id=\"SetRevenueTarget:TargetMonth\"]/div[3]")).click();
-        Thread.sleep(5000);
+        Thread.sleep(1000);
         //select status
         String MonthXpath = "//li[@data-label='January']";
         driver.findElement(By.xpath(MonthXpath)).click();
-        Thread.sleep(5000);
+        Thread.sleep(1000);
 
 
         //open status dropdown
         driver.findElement(By.xpath("//*[@id=\"SetRevenueTarget:TargetStation\"]/div[3]")).click();
-        Thread.sleep(5000);
+        Thread.sleep(1000);
         //select status
-        String StationXpath = "//li[@data-label='Zomba']";
+        String StationXpath = "//li[@data-label='BOMTO']";
         driver.findElement(By.xpath(StationXpath)).click();
-        Thread.sleep(5000);
+        Thread.sleep(1000);
 
         //open status dropdown
         driver.findElement(By.xpath("//*[@id=\"SetRevenueTarget:TargetTaxType\"]/div[3]")).click();
-        Thread.sleep(5000);
+        Thread.sleep(1000);
         //select status
-        String TaxtypePath = "//li[@data-label='Domestic VAT']";
+        String TaxtypePath = "//li[@data-label='Company Income Tax']";
         driver.findElement(By.xpath(TaxtypePath)).click();
-        Thread.sleep(5000);
+        Thread.sleep(1000);
 
 
         driver.findElement(By.xpath("//*[@id=\"SetRevenueTarget:ManagementTarget_input\"]")).sendKeys("51");
-        Thread.sleep(2000);
+        Thread.sleep(1000);
 
 
     }
@@ -3148,10 +3224,21 @@ public class Taxpayer_And_Revenue_Accounting extends BaseClass {
     @And("^Click the ok button$")
     public void click_the_ok_button() throws Throwable {
 
-        driver.findElement(By.xpath("/html/body/div[1]/form/div/div/div[3]/button[1]")).click();
+        driver.findElement(By.id("SetRevenueTarget:Ok")).click();
         driver.switchTo().defaultContent();
-        Thread.sleep(9000);
+
     }
+
+
+    @And("^Click the ok without filling data$")
+    public void click_the_ok_without_data() throws Throwable {
+
+        driver.findElement(By.id("SetRevenueTarget:Ok")).click();
+
+
+    }
+
+
 
 //z_1
 
@@ -3164,39 +3251,60 @@ public class Taxpayer_And_Revenue_Accounting extends BaseClass {
         Thread.sleep(6000);
     }
 
-    @Then("^enter the test data required and click view button$")
-    public void enter_the_test_data_required_and_click_view_button() throws Throwable {
+    @Then("^Search for data with year \"([^\"]*)\", Month \"([^\"]*)\", and Tax type \"([^\"]*)\"$")
+    public void enter_the_test_data_required_and_click_view_button(String year, String month, String taxtype) throws Throwable {
         //open status dropdown
-        driver.findElement(By.xpath("//*[@id=\"MaintainRevenueTarget:TargetYear\"]/div[3]")).click();
-        Thread.sleep(5000);
+        WebDriverWait wait = new WebDriverWait(driver,10);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"MaintainRevenueTarget:TargetYear\"]/div[3]"))).click();
+        Thread.sleep(1000);
         //select status
-        String StatusXpath = "//li[@data-label='2018']";
+        String StatusXpath = "//li[@data-label='"+year+"']";
         driver.findElement(By.xpath(StatusXpath)).click();
-        Thread.sleep(5000);
+        Thread.sleep(1000);
         //open status dropdown//*[@id="MaintainRevenueTarget:TargetMonth"]/div[3]
         driver.findElement(By.xpath("//*[@id=\"MaintainRevenueTarget:TargetMonth\"]/div[3]")).click();
-        Thread.sleep(5000);
+        Thread.sleep(1000);
         //select status
-        String MonthXpath = "//li[@data-label='January']";
+        String MonthXpath = "//li[@data-label='"+month+"']";
         driver.findElement(By.xpath(MonthXpath)).click();
-        Thread.sleep(5000);
-        //open status dropdown
-        // driver.findElement(By.xpath("//*[@id=\"MaintainRevenueTarget:TargetStation\"]")).click();
-        // Thread.sleep(5000);
-        //select status
-        // String StationXpath = "//li[@data-label='Zomba']";
-        // driver.findElement(By.xpath(StationXpath)).click();
-        // Thread.sleep(5000);
-        //open status dropdown
-        driver.findElement(By.xpath("//*[@id=\"MaintainRevenueTarget:TargetTaxType\"]/div[3]")).click();
-        Thread.sleep(5000);
-        //select status
-        String TaxtypePath = "//li[@data-label='Domestic VAT']";
-        driver.findElement(By.xpath(TaxtypePath)).click();
-        Thread.sleep(5000);
+        Thread.sleep(1000);
 
-        driver.findElement(By.xpath("//*[@id=\"MaintainRevenueTarget:j_idt62\"]")).click();
+        driver.findElement(By.xpath("//*[@id=\"MaintainRevenueTarget:TargetStation\"]/div[3]")).click();
+        Thread.sleep(1000);
+        Actions action = new Actions(driver);
+        action.sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.TAB).perform();
+        Thread.sleep(3000);
+
+        driver.findElement(By.xpath("//*[@id=\"MaintainRevenueTarget:TargetTaxType\"]/div[3]")).click();
+        Thread.sleep(1000);
+        String TaxtypePath = "//li[@data-label='"+taxtype+"']";
+        driver.findElement(By.xpath(TaxtypePath)).click();
+        Thread.sleep(1000);
+
+
+         driver.findElement(By.id("MaintainRevenueTarget:j_idt53")).click();
     }
+
+    @Then("^Confirm data appears in table \"([^\"]*)\",\"([^\"]*)\",\"([^\"]*)\"$")
+    public void confirmDataAppearsInTable(String year, String month, String taxtype) {
+         WebDriverWait wait = new WebDriverWait(driver,10);
+         WebElement yearColumn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//td[contains(text(),'" + year + "')]")));
+         Assert.assertTrue(yearColumn.isDisplayed());
+         Assert.assertTrue(driver.findElement(By.xpath("//td[contains(text(),'" + month + "')]")).isDisplayed());
+         Assert.assertTrue(driver.findElement(By.xpath("//td[contains(text(),'" + taxtype + "')]")).isDisplayed());
+    }
+
+    @Then("^Verify no data is found in table$")
+    public void verify_no_data_is_found_in_table() throws Throwable {
+        WebDriverWait wait = new WebDriverWait(driver,30);
+        WebElement noDataXpath = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//td[contains(text(),'No records found.')]")));
+        if (noDataXpath.isDisplayed()) {
+            Assert.assertTrue("No data found in table", true);
+        } else {
+            Assert.assertFalse("Data found in table", false);
+        }
+    }
+
 
     @Then("^click cancel$")
     public void click_cancel() throws Throwable {
@@ -6554,14 +6662,14 @@ public class Taxpayer_And_Revenue_Accounting extends BaseClass {
     @Given("^User navigates to the login page$")
     public void user_navigates_to_the_login_page() throws Throwable {
 
-        driver.get("http://18.202.88.7:8001/trips-ui/faces/login/tripsLogin.xhtml");
+        driver.get(Pro.getProperty("MRA_BackOffice_URL"));
     }
 
     @When("^Enters the username \"([^\"]*)\" and password \"([^\"]*)\" to login$")
     public void enters_the_username_something_and_password_something_to_login(String strArg1, String strArg2) throws Throwable {
         driver.findElement(By.id("loginForm:username")).sendKeys(strArg1);
         driver.findElement(By.id("loginForm:password")).sendKeys(strArg2);
-        driver.findElement(By.xpath("//*[@id=\"loginForm:j_idt19\"]/span")).click();
+        driver.findElement(By.id("loginForm:j_idt18")).click();
     }
 
     @Then("^User should be logged in$")
@@ -6627,12 +6735,12 @@ public class Taxpayer_And_Revenue_Accounting extends BaseClass {
 
     @Given("^User navigates to Taxpayer Accounting dropdown$")
     public void user_navigates_to_taxpayer_accounting_dropdown() throws Throwable {
-        driver.findElement(By.xpath("//*[@id=\"MenuForm:j_idt29\"]/ul/li[2]/a")).click();
+        driver.findElement(By.xpath("//*[@id=\"MenuForm:j_idt27\"]/ul/li[2]/a")).click();
     }
 
     @When("^the User clicks Find Allocation Rules Configuration$")
     public void the_user_clicks_find_allocation_rules_configuration() throws Throwable {
-        driver.findElement(By.xpath("//*[@id=\"MenuForm:j_idt29\"]/ul/li[2]/ul/li[4]/a")).click();
+        driver.findElement(By.xpath("//*[@id=\"MenuForm:j_idt27\"]/ul/li[2]/ul/li[4]/a")).click();
 
         Thread.sleep(5000);
     }
@@ -6659,8 +6767,8 @@ public class Taxpayer_And_Revenue_Accounting extends BaseClass {
 
     @Then("^Credit Allocation tab displayed$")
     public void credit_allocation_tab_displayed() throws Throwable {
-        Thread.sleep(4000);
-        String title = driver.findElement(By.xpath("//*[@id=\"AllocationConfiguration:AllocationLabel\"]")).getText();
+        WebDriverWait wait = new WebDriverWait(driver,30);
+        String title = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"AllocationConfiguration:AllocationLabel\"]"))).getText();
         Assert.assertEquals(title, "Allocation Configuration");
 
         //Get app current date
@@ -6769,7 +6877,7 @@ public class Taxpayer_And_Revenue_Accounting extends BaseClass {
     @When("^User inputs % in configuration refrence and clicks search$")
     public void user_inputs_in_the_search_field() throws Throwable {
         driver.findElement(By.id("SearchForm:ConfigurationReference")).sendKeys("%");
-        driver.findElement(By.id("SearchForm:j_idt42")).click();
+        driver.findElement(By.id("SearchForm:j_idt40")).click();
     }
 
     @Then("^Grid Table populated with search result of allocation rules$")
@@ -6940,13 +7048,13 @@ public class Taxpayer_And_Revenue_Accounting extends BaseClass {
 
     @Given("^user navigates to Taxpayer Accounting$")
     public void user_navigates_to_taxpayer_accounting_taxpayer_account_adjustment() throws Throwable {
-        driver.findElement(By.xpath("//*[@id=\"MenuForm:j_idt29\"]/ul/li[2]/a")).click();
+        driver.findElement(By.xpath("//*[@id=\"MenuForm:j_idt27\"]/ul/li[2]/a")).click();
 
     }
 
     @When("^click Taxpayer Account Adjustment$")
     public void click_taxpayer_account_adjustment() throws Throwable {
-        driver.findElement(By.xpath("//*[@id=\"MenuForm:j_idt29\"]/ul/li[2]/ul/li[6]/a")).click();
+        driver.findElement(By.xpath("//*[@id=\"MenuForm:j_idt27\"]/ul/li[2]/ul/li[6]/a")).click();
         Thread.sleep(2000);
     }
 
@@ -6957,7 +7065,7 @@ public class Taxpayer_And_Revenue_Accounting extends BaseClass {
         driver.findElement(By.id("SearchForm:periodYear")).isEnabled();
         driver.findElement(By.id("SearchForm:j_id14")).isEnabled();
         driver.findElement(By.id("SearchForm:j_id15")).isEnabled();
-        driver.findElement(By.id("SearchForm:j_idt42")).isEnabled();
+        driver.findElement(By.id("SearchForm:j_idt40")).isEnabled();
         driver.findElement(By.id("SearchForm:Cancel")).isEnabled();
     }
 
@@ -7005,13 +7113,17 @@ public class Taxpayer_And_Revenue_Accounting extends BaseClass {
 
     ///----------------------------------------------verify the process of Creating Adjustments by Revenue Officer and  Approving the adjustment by the Revenue supervisor---------------------------------------------------------------------------///
 
-    @And("^enter Tin number (.+) and click search$")
-    public void enter_Tin_number_and_click_search(String TIN) throws Throwable {
+    @And("^enter Tin number (.+) and (.+) then click search$")
+    public void enter_Tin_number_and_click_search(String TIN, String AccountType) throws Throwable {
         Thread.sleep(4000);
         driver.findElement(By.id("SearchForm:tin")).sendKeys(TIN);
-
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//*[@id=\"SearchForm:taxType\"]/div[3]")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//li[contains(text(),'" + AccountType + "')]")).click();
+        Thread.sleep(1000);
         driver.findElement(By.id("SearchForm:j_idt21")).click();
-        Thread.sleep(4000);
+        Thread.sleep(2000);
 
 //        WebDriverWait wait = new WebDriverWait(driver,30);
 //        WebElement taxType = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"SearchForm:resultsDataTable_data\"]/tr[1]/td[5]")));
@@ -7034,13 +7146,35 @@ public class Taxpayer_And_Revenue_Accounting extends BaseClass {
 
         driver.findElement(By.id("SearchForm:tin")).sendKeys(TIN);
 
-        driver.findElement(By.id("SearchForm:j_idt42")).click();
+        driver.findElement(By.id("SearchForm:j_idt40")).click();
         Thread.sleep(4000);
 
     }
 
+    @Then("^Click table column \"([^\"]*)\"$")
+    public void click_table_column(String column) throws Throwable {
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(column))).click();
+
+    }
+
+    @Then("^click on view to check match \"([^\"]*)\"$")
+    public void clickOnViewToCheckMatch(String column) {
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebElement percentageColumn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(column)));
+        String percentage = percentageColumn.getText();
+        percentageColumn.click();
+        driver.findElement(By.id("MaintainTreasuryTarget:ViewCreditAllocation")).click();
+
+        WebElement frame = wait.until(ExpectedConditions.visibilityOfElementLocated(By.tagName("iframe")));
+        driver.switchTo().frame(frame);
+        String percentageView = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("treasuryTargetAllotment:TreasuryPercentage"))).getAttribute("value");
+        Assert.assertEquals(percentage,percentageView);
+    }
+
     @Then("^select charge type (.+)$")
     public void select_charge_type(String chargetype) throws Throwable {
+        Thread.sleep(5000);
         WebDriverWait wait = new WebDriverWait(driver,100);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"TaxpayerAccountAdjustment:ChargeType\"]/div[3]"))).click();
         Thread.sleep(2000);
@@ -7112,7 +7246,7 @@ public class Taxpayer_And_Revenue_Accounting extends BaseClass {
 
     @Given("^Open CRM URL for Accounting Module$")
     public void open_CRM_URL_for_Accounting_Module() throws Throwable {
-        driver.get(Pro.getProperty("MRA_crm_url_Registration"));
+        driver.get(Pro.getProperty("CRM_URL"));
     }
 
     @When("^Close Popup Window$")
@@ -7152,8 +7286,8 @@ public class Taxpayer_And_Revenue_Accounting extends BaseClass {
     public void enters_in_search_results() throws Throwable {
         WebDriverWait wait=new WebDriverWait(driver, 20);
         WebElement search = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("crmGrid_findCriteria")));
-       // search.sendKeys(sharedatastep.A_CRMARN);
-    	search.sendKeys("ACAD/000002717/2021");
+        search.sendKeys(sharedatastep.A_CRMARN);
+//    	search.sendKeys("ACAD/000002717/2021");
         search.sendKeys(Keys.ENTER);
 
         Thread.sleep(2000);
@@ -7162,7 +7296,8 @@ public class Taxpayer_And_Revenue_Accounting extends BaseClass {
 
     @Then("^Click selected Reference Number$")
     public void click_selected_Reference_Number() throws Throwable {
-        WebElement elementLocator = driver.findElement(By.xpath(Pro.getProperty("CaseManagement_Queue_Select_ReffNo_XPATH")));
+        WebDriverWait wait=new WebDriverWait(driver, 30);
+        WebElement elementLocator = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(Pro.getProperty("CaseManagement_Queue_Select_ReffNo_XPATH"))));
 
         Actions actions = new Actions(driver);
         actions.doubleClick(elementLocator).perform();
@@ -7376,8 +7511,22 @@ public class Taxpayer_And_Revenue_Accounting extends BaseClass {
 
     }
 
-//    @When("User clicks Add button")
-//    public void userClicksAddButton() {
-//
-//    }
+    @Then("Enter transaction date")
+    public void enterTransactionDate() throws Throwable{
+        Thread.sleep(1000);
+        Actions action = new Actions(driver);
+        driver.findElement(By.id("frmReportDetails:TRANSACTION_DATE_input")).click();
+        driver.findElement(By.id("frmReportDetails:TRANSACTION_DATE_input")).sendKeys(Keys.ENTER);
+        //action.sendKeys(Keys.TAB);
+        Thread.sleep(1000);
+    }
+
+    @Then("Verify fields in Treasury target allotment screen")
+    public void verifyFieldsInTreasuryTargetAllotmentScreen() {
+         WebDriverWait wait = new WebDriverWait(driver,30);
+         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("MaintainTreasuryTarget:AddTreasuryTarget"))).isDisplayed();
+         driver.findElement(By.id("MaintainTreasuryTarget:EditTreasuryTarget")).isDisplayed();
+         driver.findElement(By.id("MaintainTreasuryTarget:ViewCreditAllocation")).isDisplayed();
+         driver.findElement(By.id("MaintainTreasuryTarget:Cancel")).isDisplayed();
+    }
 }
