@@ -911,6 +911,28 @@ public class Taxpayer_And_Revenue_Accounting extends BaseClass {
         driver.findElement(By.id(Pro.getProperty("Find_Entity_Tin_Search_Button_ID"))).click();
     }
 
+    @Then("^Select tax office \"([^\"]*)\"$")
+    public void select_tax_office(String taxOffice) throws Throwable {
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//*[@id=\"frmReportDetails:TAX_OFFICE\"]/div[3]")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//li[contains(text(),'" + taxOffice + "')]")).click();
+    }
+
+    @Then("^Select taxpayer category \"([^\"]*)\"$")
+    public void select_taxpayer_category(String taxpayerCategory) throws Throwable {
+        Thread.sleep(2000);
+        driver.findElement(By.xpath("//*[@id=\"frmReportDetails:Taxpayer_Category\"]/div[3]")).click();
+        Thread.sleep(2000);
+        driver.findElement(By.xpath("//li[contains(text(),'" + taxpayerCategory + "')]")).click();
+    }
+
+    @Then("^Click run report \"([^\"]*)\"$")
+    public void click_run_report(String buttonID) throws Throwable {
+        Thread.sleep(2000);
+        driver.findElement(By.id(buttonID)).click();
+    }
+
     @Then("^select tax type \"([^\"]*)\"$")
     public void select_tax_type(String TaxType) throws Throwable {
         Thread.sleep(15000);
@@ -944,11 +966,11 @@ public class Taxpayer_And_Revenue_Accounting extends BaseClass {
         Thread.sleep(2000);
         driver.findElement(By.id(Pro.getProperty("Find_Entity_Tin_Search_Button_ID"))).click();
         //driver.findElement(By.id(Pro.getProperty("Find_Entity_Tin_Search_Button_ID"))).click();
-//        Thread.sleep(15000);
-//        driver.findElement(By.xpath(Pro.getProperty("Find_Business_Transaction_First_Table_Row_XPATH"))).click();
-//        Thread.sleep(2000);
-//
-//        driver.findElement(By.id(Pro.getProperty("Continue_Button_ID"))).click();
+        Thread.sleep(15000);
+        driver.findElement(By.xpath(Pro.getProperty("Find_Business_Transaction_First_Table_Row_XPATH"))).click();
+        Thread.sleep(2000);
+
+        driver.findElement(By.id(Pro.getProperty("Continue_Button_ID"))).click();
 
         Thread.sleep(8000);
         UnallocatedCreditAmount = Double.parseDouble(driver.findElement(By.id("CreditAllocation:crBalance_input")).getAttribute("value").replaceAll(",", ""));
@@ -979,12 +1001,12 @@ public class Taxpayer_And_Revenue_Accounting extends BaseClass {
         //driver.findElement(By.id(Pro.getProperty("Find_Entity_Tin_Search_Button_ID"))).click();
         Thread.sleep(3000);
 
-//        //click first table row
-//        driver.findElement(By.xpath("//*[@id=\"SearchForm:resultsDataTable_data\"]/tr[1]/td[1]")).click();
-//
-//        //click continue
-//        Thread.sleep(2000);
-//        driver.findElement(By.id("SearchForm:j_id14")).click();
+        //click first table row
+        driver.findElement(By.xpath("//*[@id=\"SearchForm:resultsDataTable_data\"]/tr[1]/td[1]")).click();
+
+        //click continue
+        Thread.sleep(2000);
+        driver.findElement(By.id("SearchForm:j_id14")).click();
 
         Thread.sleep(10000);
 
@@ -2303,7 +2325,7 @@ public class Taxpayer_And_Revenue_Accounting extends BaseClass {
 
     @Then("^Enter TIN \"([^\"]*)\"$")
     public void enter_tin_something(String tin) throws Throwable {
-////*[@id="frmReportDetails:TIN"]
+
         driver.findElement(By.xpath("//*[@id=\"frmReportDetails:TIN\"]")).sendKeys(tin);
     }
 
@@ -4670,8 +4692,13 @@ public class Taxpayer_And_Revenue_Accounting extends BaseClass {
 
     @And("^Enter start Date and  end Date provided$")
     public void enter_start_date_and_end_date_provided() throws Throwable {
-        driver.findElement(By.xpath("//*[@id=\"frmReportDetails:StartDate_input\"]")).sendKeys("11/07/2020");
-        driver.findElement(By.xpath("//*[@id=\"frmReportDetails:EndDate_input\"]")).sendKeys("12/07/2020");
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//*[@id=\"frmReportDetails:StartDate_input\"]")).sendKeys("11/07/2019");
+        Actions actions = new Actions(driver);
+        actions.sendKeys(Keys.TAB).perform();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//*[@id=\"frmReportDetails:EndDate_input\"]")).sendKeys(Keys.ENTER);
+
         Thread.sleep(1000);
     }
 

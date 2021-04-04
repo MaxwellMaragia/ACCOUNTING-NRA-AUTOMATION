@@ -7,7 +7,7 @@ Feature:[SUC:04-02] Print Revenue Accounting Reports
     Then Navigate to Reporting-->Reports
     Then Select report to print "Revenue Ledger Details"
     Then Select report file type "<report_format>"
-    Then Enter transaction date
+    Then Select tax office "All"
     Then click run report
     Then Verify file "Revenue Ledger Details.pdf" has been downloaded in downloads directory "C:\\Users\\Maxwell Maragia\\Downloads"
     Examples:

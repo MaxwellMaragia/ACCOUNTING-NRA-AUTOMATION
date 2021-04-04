@@ -50,7 +50,7 @@ Feature: [SUC:03-06] Perform Taxpayer Account Adjustments
     Examples:
       | TIN         | AccountType         | chargetype | adjtype | reason                            | code    | amount   | RefNo                                   |
       | N0000036323 | Suspense Account    | Liability  | Credit  | MISCELLANEOUS ADJUSTMENT - CREDIT | 1111201 | 67587678 | Processing Completed - Reference Number |
-      | N0000036323 | Personal Income Tax | Liability  | Debit   | MISCELLANEOUS ADJUSTMENT - DEBIT  | 1111201 | 67587678 | Processing Completed - Reference Number |
+#      | N0000036323 | Personal Income Tax | Liability  | Debit   | MISCELLANEOUS ADJUSTMENT - DEBIT  | 1111201 | 67587678 | Processing Completed - Reference Number |
 
   @SUC:03-06 @UAT_TCS-02.19.3 @UAT_TCS-02.19.6
   Scenario Outline: UAT_M3_06-04-verify the process of Creating Adjustments by Revenue Officer and  rejecting
